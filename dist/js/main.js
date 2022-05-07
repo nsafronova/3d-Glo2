@@ -25,20 +25,34 @@
       }))
    })(), (() => {
       const e = document.querySelector(".popup"),
-         t = document.querySelector(".popup-content"),
-         o = document.querySelectorAll(".popup-btn");
-      let c, n, a = 0;
-      const l = () => {
-         a++, c = requestAnimationFrame(l), a < 15 ? t.style.top = a + "%" : (cancelAnimationFrame(c), a = 0)
-      };
-      o.forEach((t => {
-         t.addEventListener("click", (() => {
-            n < 786 || l(), e.style.display = "block"
+         t = document.querySelector(".popup-content");
+      let o;
+      document.querySelectorAll(".popup-btn").forEach((c => {
+         c.addEventListener("click", (() => {
+            o < 786 ? e.style.display = "block" : (({
+               timing: e,
+               draw: t,
+               duration: o
+            }) => {
+               let c = performance.now();
+               requestAnimationFrame((function n(a) {
+                  let r = (a - c) / o;
+                  r > 1 && (r = 1);
+                  let l = e(r);
+                  t(l), r < 1 && requestAnimationFrame(n)
+               }))
+            })({
+               duration: 700,
+               timing: e => Math.pow(e, 2),
+               draw(o) {
+                  t.style.top = 15 * o + "%", e.style.display = "block"
+               }
+            })
          }))
       })), e.addEventListener("click", (t => {
          t.target.closest(".popup-content") && !t.target.classList.contains("popup-close") || (e.style.display = "none")
       })), window.addEventListener("resize", (() => {
-         n = document.documentElement.clientWidth
+         o = document.documentElement.clientWidth
       }))
    })(), (() => {
       const e = document.querySelectorAll(".calc-block input"),
@@ -83,19 +97,19 @@
       const a = (e, t, o) => {
             e[t].classList.remove(o)
          },
-         l = (e, t, o) => {
+         r = (e, t, o) => {
             e[t].classList.add(o)
          },
-         r = () => {
-            a(t, n, "portfolio-item-active"), a(o, n, "dot-active"), n++, n >= t.length && (n = 0), l(t, n, "portfolio-item-active"), l(o, n, "dot-active")
+         l = () => {
+            a(t, n, "portfolio-item-active"), a(o, n, "dot-active"), n++, n >= t.length && (n = 0), r(t, n, "portfolio-item-active"), r(o, n, "dot-active")
          },
          s = (e = 1500) => {
-            c = setInterval(r, e)
+            c = setInterval(l, e)
          };
       e.addEventListener("click", (e => {
          e.preventDefault(), e.target.matches(".dot, .portfolio-btn") && (a(t, n, "portfolio-item-active"), a(o, n, "dot-active"), e.target.matches("#arrow-right") ? n++ : e.target.matches("#arrow-left") ? n-- : e.target.classList.contains("dot") && o.forEach(((t, o) => {
             e.target === t && (n = o)
-         })), n >= t.length ? n = 0 : n < 0 && (n = t.length - 1), l(t, n, "portfolio-item-active"), l(o, n, "dot-active"))
+         })), n >= t.length ? n = 0 : n < 0 && (n = t.length - 1), r(t, n, "portfolio-item-active"), r(o, n, "dot-active"))
       })), e.addEventListener("mouseenter", (e => {
          e.target.matches(".dot, .portfolio-btn") && clearInterval(c)
       }), !0), e.addEventListener("mouseleave", (e => {
@@ -107,15 +121,15 @@
          c = document.querySelector(".calc-square"),
          n = document.querySelector(".calc-count"),
          a = document.querySelector(".calc-day"),
-         l = document.getElementById("total");
+         r = document.getElementById("total");
       t.addEventListener("input", (t => {
          t.target !== o && t.target !== c && t.target !== n && t.target !== a || (() => {
             const t = +o.options[o.selectedIndex].value,
-               r = +c.value;
+               l = +c.value;
             let s = 0,
                i = 1,
                u = 1;
-            n.value > 1 && (i += n.value / 10), a.value && a.value < 5 ? u = 2 : a.value && a.value < 10 && (u = 1.5), o.value && c.value ? (s = e * t * r * i * u, l.textContent = s) : s = 0, l.textContent = s
+            n.value > 1 && (i += n.value / 10), a.value && a.value < 5 ? u = 2 : a.value && a.value < 10 && (u = 1.5), o.value && c.value ? (s = e * t * l * i * u, r.textContent = s) : s = 0, r.textContent = s
          })()
       }))
    })(100)
