@@ -3,9 +3,8 @@ const slider = () => {
    const sliderBlock = document.querySelector('.portfolio-content');
    const slides = document.querySelectorAll('.portfolio-item');
    const dots = document.querySelectorAll('.dot');
-   const sliderDotWrap = document.querySelectorAll('.portfolio-dots');
+   const sliderDotWrap = document.querySelector('.portfolio-dots');
    const timeInterval = 2000;
-
 
    let currentSlide = 0;
    let interval;
@@ -18,11 +17,14 @@ const slider = () => {
       elems[index].classList.add(strClass);
    };
 
-   // const addDots = () => {
-   //    for (let i = 0; i < slides.length - 1; i++) {
-   //       sliderDotWrap.append(dots.clone());
-   //    }
-   // };
+   const addDots = () => {
+      slides.forEach((dot) => {
+         dot = dots[0].cloneNode();
+         // dot.innerHTML = '<li class="dot"></li>';
+         sliderDotWrap.append(dot);
+      });
+   };
+
 
    const autoSlide = () => {
       prevSlide(slides, currentSlide, 'portfolio-item-active');
@@ -38,7 +40,6 @@ const slider = () => {
    };
 
    const startSlide = (timer = 1500) => {
-
       interval = setInterval(autoSlide, timer);
    };
 
@@ -54,6 +55,7 @@ const slider = () => {
       }
       prevSlide(slides, currentSlide, 'portfolio-item-active');
       prevSlide(dots, currentSlide, 'dot-active');
+
       if (e.target.matches('#arrow-right')) {
          currentSlide++;
       } else if (e.target.matches('#arrow-left')) {
@@ -88,7 +90,7 @@ const slider = () => {
       }
    }, true);
 
-
+   addDots();
    startSlide(timeInterval);
 
 };
