@@ -1,3 +1,4 @@
+"use strict";
 const timer = (deadline) => {
    const timerHours = document.getElementById('timer-hours');
    const timerMinutes = document.getElementById('timer-minutes');

@@ -1,3 +1,4 @@
+"use strict";
 const validator = () => {
 
    const inputCalc = document.querySelectorAll('.calc-block input');
