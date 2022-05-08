@@ -18,14 +18,17 @@ const slider = () => {
    };
 
    const addDots = () => {
-      slides.forEach(() => {
+      slides.forEach((e, index) => {
+         console.log(index);
          const li = document.createElement('li');
+         if (index === 0) {
+            li.classList.add('dot-active');
+         }
          li.classList.add('dot');
          sliderDotWrap.append(li);
-         dots = document.querySelectorAll('.dot');
       });
+      dots = document.querySelectorAll('.dot');
    };
-
 
    const autoSlide = () => {
       prevSlide(slides, currentSlide, 'portfolio-item-active');

@@ -14,9 +14,9 @@
                seconds: Math.floor(e % 60)
             }
          })();
-         e.timeRemaining > 0 && (t.textContent = n(e.hours), o.textContent = n(e.minutes), c.textContent = n(e.seconds))
+         e.timeRemaining > 0 && (t.textContent = a(e.hours), o.textContent = a(e.minutes), c.textContent = a(e.seconds))
       }), 1e3);
-      const n = e => e >= 0 && e < 10 ? "0" + e : e
+      const a = e => e >= 0 && e < 10 ? "0" + e : e
    })(), (() => {
       const e = document.querySelector("menu");
       document.addEventListener("click", (t => {
@@ -35,11 +35,11 @@
                duration: o
             }) => {
                let c = performance.now();
-               requestAnimationFrame((function n(a) {
-                  let r = (a - c) / o;
-                  r > 1 && (r = 1);
-                  let l = e(r);
-                  t(l), r < 1 && requestAnimationFrame(n)
+               requestAnimationFrame((function a(n) {
+                  let l = (n - c) / o;
+                  l > 1 && (l = 1);
+                  let r = e(l);
+                  t(r), l < 1 && requestAnimationFrame(a)
                }))
             })({
                duration: 700,
@@ -92,47 +92,48 @@
       const e = document.querySelector(".portfolio-content"),
          t = document.querySelectorAll(".portfolio-item"),
          o = document.querySelector(".portfolio-dots");
-      let c, n = document.querySelectorAll(".dot"),
-         a = 0;
-      const r = (e, t, o) => {
+      let c, a = document.querySelectorAll(".dot"),
+         n = 0;
+      const l = (e, t, o) => {
             e[t].classList.remove(o)
          },
-         l = (e, t, o) => {
+         r = (e, t, o) => {
             e[t].classList.add(o)
          },
          s = () => {
-            r(t, a, "portfolio-item-active"), r(n, a, "dot-active"), a++, a >= t.length && (a = 0), l(t, a, "portfolio-item-active"), l(n, a, "dot-active")
+            l(t, n, "portfolio-item-active"), l(a, n, "dot-active"), n++, n >= t.length && (n = 0), r(t, n, "portfolio-item-active"), r(a, n, "dot-active")
          },
          i = (e = 1500) => {
             c = setInterval(s, e)
          };
       e.addEventListener("click", (e => {
-         e.preventDefault(), e.target.matches(".dot, .portfolio-btn") && (r(t, a, "portfolio-item-active"), r(n, a, "dot-active"), e.target.matches("#arrow-right") ? a++ : e.target.matches("#arrow-left") ? a-- : e.target.classList.contains("dot") && n.forEach(((t, o) => {
-            e.target === t && (a = o)
-         })), a >= t.length ? a = 0 : a < 0 && (a = t.length - 1), l(t, a, "portfolio-item-active"), l(n, a, "dot-active"))
+         e.preventDefault(), e.target.matches(".dot, .portfolio-btn") && (l(t, n, "portfolio-item-active"), l(a, n, "dot-active"), e.target.matches("#arrow-right") ? n++ : e.target.matches("#arrow-left") ? n-- : e.target.classList.contains("dot") && a.forEach(((t, o) => {
+            e.target === t && (n = o)
+         })), n >= t.length ? n = 0 : n < 0 && (n = t.length - 1), r(t, n, "portfolio-item-active"), r(a, n, "dot-active"))
       })), e.addEventListener("mouseenter", (e => {
          e.target.matches(".dot, .portfolio-btn") && clearInterval(c)
       }), !0), e.addEventListener("mouseleave", (e => {
          e.target.matches(".dot, .portfolio-btn") && i(2e3)
-      }), !0), t.forEach((() => {
-         const e = document.createElement("li");
-         e.classList.add("dot"), o.append(e), n = document.querySelectorAll(".dot")
-      })), i(2e3)
+      }), !0), t.forEach(((e, t) => {
+         console.log(t);
+         const c = document.createElement("li");
+         0 === t && c.classList.add("dot-active"), c.classList.add("dot"), o.append(c)
+      })), a = document.querySelectorAll(".dot"), i(2e3)
    })(), ((e = 100) => {
       const t = document.querySelector(".calc-block"),
          o = document.querySelector(".calc-type"),
          c = document.querySelector(".calc-square"),
-         n = document.querySelector(".calc-count"),
-         a = document.querySelector(".calc-day"),
-         r = document.getElementById("total");
+         a = document.querySelector(".calc-count"),
+         n = document.querySelector(".calc-day"),
+         l = document.getElementById("total");
       t.addEventListener("input", (t => {
-         t.target !== o && t.target !== c && t.target !== n && t.target !== a || (() => {
+         t.target !== o && t.target !== c && t.target !== a && t.target !== n || (() => {
             const t = +o.options[o.selectedIndex].value,
-               l = +c.value;
+               r = +c.value;
             let s = 0,
                i = 1,
-               u = 1;
-            n.value > 1 && (i += n.value / 10), a.value && a.value < 5 ? u = 2 : a.value && a.value < 10 && (u = 1.5), o.value && c.value ? (s = e * t * l * i * u, r.textContent = s) : s = 0, r.textContent = s
+               d = 1;
+            a.value > 1 && (i += a.value / 10), n.value && n.value < 5 ? d = 2 : n.value && n.value < 10 && (d = 1.5), o.value && c.value ? (s = e * t * r * i * d, l.textContent = s) : s = 0, l.textContent = s
          })()
       }))
    })(100)
