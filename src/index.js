@@ -18,7 +18,7 @@ sendForm({
    formId: 'form1',
    someElem: [{
       type: 'input',
-      id: 'form2-message'
+      // id: 'form2-message'
    }]
 });
 sendForm({
