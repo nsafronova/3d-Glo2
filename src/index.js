@@ -5,11 +5,33 @@ import validator from './modules/validator';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import calc from './modules/calculator';
+import sendForm from './modules/sendForm';
 
-timer('8 may 2022');
+timer('18 may 2022');
 menu();
 modal();
 validator();
 tabs();
 slider();
 calc(100);
+sendForm({
+   formId: 'form1',
+   someElem: [{
+      type: 'input',
+      id: 'form2-message'
+   }]
+});
+sendForm({
+   formId: 'form2',
+   someElem: [{
+      type: 'input',
+      id: 'form2-message'
+   }]
+});
+sendForm({
+   formId: 'form3',
+   someElem: [{
+      type: 'input',
+      id: 'form2-message'
+   }]
+});

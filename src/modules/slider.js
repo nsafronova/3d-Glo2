@@ -19,7 +19,6 @@ const slider = () => {
 
    const addDots = () => {
       slides.forEach((e, index) => {
-         console.log(index);
          const li = document.createElement('li');
          if (index === 0) {
             li.classList.add('dot-active');
