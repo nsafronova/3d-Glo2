@@ -1,3 +1,4 @@
+"use strict";
 import timer from './modules/timer';
 import menu from './modules/menu';
 import modal from './modules/modal';
@@ -17,21 +18,21 @@ calc(100);
 sendForm({
    formId: 'form1',
    someElem: [{
-      type: 'input',
-      // id: 'form2-message'
+      type: 'block',
+      id: 'total'
    }]
 });
 sendForm({
    formId: 'form2',
    someElem: [{
-      type: 'input',
-      id: 'form2-message'
+      type: 'block',
+      id: 'total'
    }]
 });
 sendForm({
    formId: 'form3',
    someElem: [{
-      type: 'input',
-      id: 'form2-message'
+      type: 'block',
+      id: 'total'
    }]
 });

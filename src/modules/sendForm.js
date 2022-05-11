@@ -3,7 +3,7 @@ const sendForm = ({
    formId,
    someElem = []
 }) => {
-   const form = document.getElementById(formId);
+   const form = document.querySelector(`#${formId}`);
    const statusBlock = document.createElement('div');
    const loadText = 'Загрузка..';
    const errorText = 'Ошибка';
@@ -11,7 +11,7 @@ const sendForm = ({
 
    const inputPhone = form.querySelector('[name="user_phone"]');
    const inputName = form.querySelector('[name="user_name"]');
-   const inputMessage = document.querySelector('[name="user_message"]');
+   const inputMessage = document.querySelectorAll('[name="user_message"]');
    const inputEmail = form.querySelector('[name="user_email"]');
 
    inputPhone.addEventListener('input', (e) => {
@@ -30,13 +30,16 @@ const sendForm = ({
       }
    });
 
-   inputMessage.addEventListener('input', (e) => {
-      if (e.target.value.match(/[а-я -0-9,:;.]+/gi)) {
-         e.target.classList.add('success');
-      } else {
-         e.target.classList.add('error');
-      }
+   inputMessage.forEach((e) => {
+      e.addEventListener('input', (e) => {
+         if (e.target.value.match(/[а-я -0-9,:;.]+/gi)) {
+            e.target.classList.add('success');
+         } else {
+            e.target.classList.add('error');
+         }
+      });
    });
+
 
    inputEmail.addEventListener('input', (e) => {
       if (e.target.value.match(/[a-z0-9@-_.!~*']+/gi)) {
@@ -51,7 +54,7 @@ const sendForm = ({
 
       list.forEach(input => {
 
-         if (!input.classList.contains('success')) {
+         if (!input.classList.contains('success') && input.classList.contains('error')) {
             success = false;
          }
       });
@@ -70,8 +73,11 @@ const sendForm = ({
    };
 
    const clearClasses = () => {
-      inputMessage.classList.remove('success');
-      inputMessage.classList.remove('error');
+      inputMessage.forEach((e) => {
+         e.classList.remove('success');
+         e.classList.remove('error');
+      });
+
    };
 
    const submitForm = () => {
@@ -86,31 +92,26 @@ const sendForm = ({
          formBody[key] = val;
       });
 
-      someElem.forEach(elem => {
+      someElem.forEach((elem) => {
          const element = document.getElementById(elem.id);
-         if (elem.type === 'block') {
+         if (elem.type === "block" && element.textContent !== "0") {
             formBody[elem.id] = element.textContent;
-         } else if (elem.type === 'input') {
+         } else if (elem.type === "input" && element.value !== 0) {
             formBody[elem.id] = element.value;
-         } else {
-            return;
          }
       });
 
 
       if (validate(formElements)) {
          sentData(formBody)
-            .then(data => {
+            .then((data) => {
                formElements.forEach(input => {
                   input.value = '';
                   statusBlock.textContent = successText;
                });
             })
-            .catch(error => {
-               formElements.forEach(input => {
-                  input.value = '';
-                  statusBlock.textContent = errorText;
-               });
+            .catch((error) => {
+               statusBlock.textContent = errorText;
             });
       } else {
          alert('Данные не валидны!');
