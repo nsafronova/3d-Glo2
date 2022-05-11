@@ -53,7 +53,9 @@
                   a.textContent = "Ошибка"
                })) : (alert("Данные не валидны!"), e.forEach((e => {
                   e.value = "", a.textContent = ""
-               })))
+               }))), setTimeout((() => {
+                  a.textContent = ""
+               }), 3e3)
             })(), n.forEach((e => {
                e.classList.remove("success"), e.classList.remove("error")
             }))

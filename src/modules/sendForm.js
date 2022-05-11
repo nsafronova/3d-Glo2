@@ -120,6 +120,9 @@ const sendForm = ({
             statusBlock.textContent = '';
          });
       }
+      setTimeout(() => {
+         statusBlock.textContent = "";
+      }, 3000);
    };
 
    try {
