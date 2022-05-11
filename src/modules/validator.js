@@ -15,7 +15,7 @@ const validator = () => {
 
    inputText.forEach((e) => {
       e.addEventListener('input', (e) => {
-         e.target.value = e.target.value.match(/[а-я-]+/gi);
+         e.target.value = e.target.value.match(/[а-я -]+/gi);
       });
    });
 

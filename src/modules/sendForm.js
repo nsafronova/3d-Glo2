@@ -23,7 +23,7 @@ const sendForm = ({
    });
 
    inputName.addEventListener('input', (e) => {
-      if (e.target.value.match(/[а-я -]+/gi)) {
+      if (e.target.value.match(/[а-я -]+/gi) || e.target.value !== '') {
          e.target.classList.add('success');
       } else {
          e.target.classList.add('error');
@@ -107,6 +107,7 @@ const sendForm = ({
             .then((data) => {
                formElements.forEach(input => {
                   input.value = '';
+                  statusBlock.style.color = 'white';
                   statusBlock.textContent = successText;
                });
             })
@@ -122,7 +123,7 @@ const sendForm = ({
       }
       setTimeout(() => {
          statusBlock.textContent = "";
-      }, 3000);
+      }, 5000);
    };
 
    try {

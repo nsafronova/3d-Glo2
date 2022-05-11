@@ -12,9 +12,7 @@ const modal = () => {
 
    buttons.forEach(btn => {
       btn.addEventListener('click', () => {
-         if (width < 786) {
-            modal.style.display = 'block';
-         } else {
+         if (width > 786) {
             animate({
                duration: 700,
                timing(timeFraction) {
@@ -25,6 +23,8 @@ const modal = () => {
                   modal.style.display = 'block';
                }
             });
+         } else {
+            modal.style.display = 'block';
          }
       });
    });
